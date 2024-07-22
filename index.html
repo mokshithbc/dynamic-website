@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMIT Hackathon Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 15px;
+            background: #77aaff;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const regNo = document.getElementById('regNo').value;
+            const branch = document.getElementById('branch').value;
+
+            const response = await fetch('https://your-api-gateway-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    regNo: regNo,
+                    branch: branch
+                })
+            });
+
+            if (response.ok) {
+                alert('Registration successful!');
+            } else {
+                alert('Registration failed. Please try again.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>NMIT Hackathon Registration</h2>
+        <form onsubmit="handleSubmit(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="regNo">Registration Number:</label>
+            <input type="text" id="regNo" name="regNo" required>
+            
+            <label for="branch">Branch:</label>
+            <input type="text" id="branch" name="branch" required>
+            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
